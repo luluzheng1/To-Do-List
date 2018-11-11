@@ -49,9 +49,8 @@ function createAddWindow(){
 }
 
 // Catch task:add
-ipcMain.on('task:add', function(e, item){
-	console.log(item);
-	mainWindow.webContents.send('item:add', item);
+ipcMain.on('task:add', function(e, task){
+	mainWindow.webContents.send('task:add', task);
 	addWindow.close();
 });
 
@@ -69,9 +68,12 @@ const mainMenuTemplate = [
 				}
 			},
 			{
-				label: 'Clear Task',
+				label: 'Clear Tasks',
 				accelerator: process.platform == 'darwin' ? 'Command+D' :
 				'Ctrl+D',  
+				click(){
+					mainWindow.webContents.send('task:clear');
+				}
 			},
 			{
 				label: 'Quit',
@@ -102,7 +104,7 @@ if(process.env.NODE_ENV !== 'production') {
 				accelerator: process.platform == 'darwin' ? 'Command+I' :
 				'Ctrl+I',  
 				//Decide which window to open 
-				click(item, focusedWindow){
+				click(task, focusedWindow){
 					focusedWindow.toggleDevTools();
 				}
 			},
