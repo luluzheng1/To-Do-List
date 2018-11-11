@@ -1,0 +1,27 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "To Do List Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luluzheng1/To-Do-List-.git"
+  },
+  "keywords": [
+    "to",
+    "do",
+    "list"
+  ],
+  "author": "Wenlu Zheng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luluzheng1/To-Do-List-/issues"
+  },
+  "homepage": "https://github.com/luluzheng1/To-Do-List-#readme",
+  "dependencies": {
+    "electron": "^3.0.8"
+  }
+}
