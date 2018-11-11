@@ -3,7 +3,7 @@ const url = require('url');
 const path = require('path');
 
 //gets objects from electron
-const {app, BrowserWindow} = electron;
+const {app, BrowserWindow, Menu} = electron;
 
 let mainWindow;
 
@@ -17,4 +17,31 @@ app.on('ready', function(){
 		protocol:'file:', 
 		slashes: true
 	}));
+
+	// Build menu from template
+	const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+	// Insert menu
+	Menu.setApplicationMenu(mainMenu);
 });
+
+// Create menu template
+const mainMenuTemplate = [
+	{
+		label: 'File',
+		submenu:[
+			{
+				label: 'Add Task'
+			},
+			{
+				label: 'Clear Task'
+			},
+			{
+				label: 'Quit',
+				click(){
+					app.quit();
+				}
+			}
+		]
+	}
+
+];
