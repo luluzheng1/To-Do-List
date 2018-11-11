@@ -18,7 +18,10 @@ app.on('ready', function(){
 		protocol:'file:', 
 		slashes: true
 	}));
-
+	// Quit app when closed
+	mainWindow.on('closed', function(){
+		app.quit();
+	});
 	// Build menu from template
 	const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
 	// Insert menu
@@ -48,12 +51,16 @@ const mainMenuTemplate = [
 		submenu:[
 			{
 				label: 'Add Task',
+				accelerator: process.platform == 'darwin' ? 'Command+I' :
+				'Ctrl+I',  
 				click(){
 					createAddWindow();
 				}
 			},
 			{
-				label: 'Clear Task'
+				label: 'Clear Task',
+				accelerator: process.platform == 'darwin' ? 'Command+O' :
+				'Ctrl+O',  
 			},
 			{
 				label: 'Quit',
