@@ -42,6 +42,10 @@ function createAddWindow(){
 		protocol:'file:', 
 		slashes: true
 	}));
+	// Handle Garbage
+	addWindow.on('close', function(){
+		addWindow = null;
+	});
 }
 
 // Create menu template
@@ -51,16 +55,16 @@ const mainMenuTemplate = [
 		submenu:[
 			{
 				label: 'Add Task',
-				accelerator: process.platform == 'darwin' ? 'Command+I' :
-				'Ctrl+I',  
+				accelerator: process.platform == 'darwin' ? 'Command+N' :
+				'Ctrl+N',  
 				click(){
 					createAddWindow();
 				}
 			},
 			{
 				label: 'Clear Task',
-				accelerator: process.platform == 'darwin' ? 'Command+O' :
-				'Ctrl+O',  
+				accelerator: process.platform == 'darwin' ? 'Command+D' :
+				'Ctrl+D',  
 			},
 			{
 				label: 'Quit',
@@ -74,3 +78,30 @@ const mainMenuTemplate = [
 	}
 
 ];
+
+// Adjust Menu for Mac
+if(process.platform == 'darwin'){
+	// Add empty object to beginning of Menu
+	mainMenuTemplate.unshift({});
+}
+
+// Add developer tools item if not in prod
+if(process.env.NODE_ENV !== 'production') {
+	mainMenuTemplate.push({
+		label: 'Developer Tools',
+		submenu: [
+			{
+				label: 'Toggle DevTools',
+				accelerator: process.platform == 'darwin' ? 'Command+I' :
+				'Ctrl+I',  
+				//Decide which window to open 
+				click(item, focusedWindow){
+					focusedWindow.toggleDevTools();
+				}
+			},
+			{
+				role: 'reload'
+			}
+		]
+	});
+}
