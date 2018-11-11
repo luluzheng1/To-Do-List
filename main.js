@@ -3,7 +3,7 @@ const url = require('url');
 const path = require('path');
 
 //gets objects from electron
-const {app, BrowserWindow, Menu} = electron;
+const {app, BrowserWindow, Menu, ipcMain} = electron;
 
 let mainWindow;
 let addWindow;
@@ -47,6 +47,13 @@ function createAddWindow(){
 		addWindow = null;
 	});
 }
+
+// Catch task:add
+ipcMain.on('task:add', function(e, item){
+	console.log(item);
+	mainWindow.webContents.send('item:add', item);
+	addWindow.close();
+});
 
 // Create menu template
 const mainMenuTemplate = [
