@@ -2,8 +2,11 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-//gets objects from electron
+// Gets objects from electron
 const {app, BrowserWindow, Menu, ipcMain} = electron;
+
+// Set ENV to PROD
+process.env.NODE_ENV = 'production';
 
 let mainWindow;
 let addWindow;
