@@ -19,4 +19,8 @@
   
 # Builds
   * Check in Release Builds Folder for Sample Build  
-
+  * Current build is a linux build, but this desktop app
+    is supported across Windows, Mac, and Linux platforms.
+  * Specify the Build type by running 
+    `npm run package-[OS_TYPE]`
+  * Must have npm and electron installed prior to build
